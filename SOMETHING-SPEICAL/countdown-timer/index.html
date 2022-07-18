@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Countdown timer</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>New Year Countdown</h1>
+        <div class="countdown-container">
+            <div class="countdown-el days-c">
+                <p class="big-text" id="days"></p>
+                <span>days</span>
+            </div>
+            <div class="countdown-el hours-c">
+                <p class="big-text" id="hours"></p>
+                <span>hours</span>
+            </div>
+            <div class="countdown-el mins-c">
+                <p class="big-text" id="mins"></p>
+                <span>mins</span>
+            </div>
+            <div class="countdown-el sec-c">
+                <p class="big-text" id="sec"></p>
+                <span>sec</span>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    const daysEl = document.getElementById('days');
+    const hourEl = document.getElementById('hours');
+    const minsEl = document.getElementById('mins');
+    const secondsEl = document.getElementById('sec')
+
+    const newYears = '1/1/2023';
+    countdown();
+
+    function countdown() {
+        const newYearsDate = new Date(newYears);
+        const currentDate = new Date();
+
+        const totalSeconds = newYearsDate - currentDate
+
+        const days = Math.floor(totalSeconds / (1000 * 3600 * 24));
+        const hours = Math.floor(totalSeconds / (1000 * 3600)) % 24;
+        const minutes = Math.floor(totalSeconds / (1000 * 60)) % 60;
+        const seconds = Math.floor(totalSeconds / 1000) % 60;
+
+        daysEl.innerHTML = days
+        hourEl.innerHTML = formatTime(hours);
+        minsEl.innerHTML = formatTime(minutes);
+        secondsEl.innerHTML = formatTime(seconds);
+    }
+    function formatTime(time) {
+        return time < 10 ? `0${time}`: time;
+
+    }
+    setInterval(countdown, 1000);
+</script>
